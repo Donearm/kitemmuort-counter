@@ -1,0 +1,61 @@
+What's a "kitemmuort"?
+=====================
+
+Italians may just skip to the next section; everybody else, I'll give you an 
+explanation. _Kitemmuort_ is a curse, in neapolitan (a southern Italy dialect) 
+that is very offensive towards religion and one's relatives (dead ones). It's an 
+exclamation for moments when things don't go the way you want them to go or when 
+you want to truly offend somebody. It has a version in every italian dialect 
+(perhaps the most famous being "mortacci" in Rome's parlance) and I bet there's 
+something similar in your language too. If there isn't (really?), consider 
+kitemmuort to be like "fuck" or any other exclamation you give out of 
+frustration or rage.
+
+What does this do?
+==================
+
+Have you ever wondered how many times you swear out of frustration or any other 
+motivation? No? Well, I have. That's why I wrote this.
+
+Kitemmuort-counter allows you to keep track of how many _kitemmuort_ you 
+exclaim throughout your days. Just set the number each day and it will save it 
+in a SQLite database along with the current date. You can also set/change the 
+count for past (or future!) dates. It's really possible to exploit the counter 
+in many ways but hey, it's just for fun, do you really want to use it in 
+production? :)
+
+Anyway, usage is:
+
+	kitemmuort-count (-c|-s) [-d <date>]
+
+	Arguments:
+		-count|-c
+			Show the kitemmuort count for a date (default is today)
+		-set|-s
+			Set the amount of kitemmuort for a date (default is today)
+		-date|-d
+			Operate (count/set) on a specific date instead than today
+			Use YYYY-MM-DD (example: 2012-10-01)
+
+Basically, use `-count` to see how many kitemmuorts you have exclaimed on a 
+given date (or today if you haven't specified any). Use `-set` to set the count 
+(who would have thought, eh?). Not specifying anything shows the count for 
+today.
+
+That's it. Keep It Simple Stupid. If you want to contribuite/play with this, do 
+send a pull request. Even just adding another item in the TODO list below. Or 
+fork.
+
+TODO
+====
+
+* Generate a graphic from the data?
+* Add a GUI?
+* Make it more user-friendly for Windows. Does anybody care about it?
+
+LICENSE
+======
+
+MIT
+
+See LICENSE
