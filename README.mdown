@@ -46,6 +46,16 @@ That's it. Keep It Simple Stupid. If you want to contribuite/play with this, do
 send a pull request. Even just adding another item in the TODO list below. Or 
 fork.
 
+Installation & Requirements
+===========================
+
+Install the sqlite3 driver:
+
+	go get github.com/mattn/go-sqlite3
+
+and you'll be all set. Of course you also need Go itself. Then `go build` or 
+`go run` the program, as you prefer
+
 TODO
 ====
 
