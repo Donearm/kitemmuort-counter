@@ -5,14 +5,14 @@ Author: Gianluca Fiore <forod.g@gmail.com> © 2013-2014
 package main
 
 import (
-	"fmt"
-	"log"
+	"database/sql"
 	"flag"
+	"fmt"
+	_ "github.com/mattn/go-sqlite3"
+	"log"
 	"os"
 	"path/filepath"
 	"time"
-	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 var usageString = `
@@ -28,9 +28,9 @@ Arguments:
 		Use YYYY-MM-DD (example: 2012-10-01)
 
 `
-var countArg bool // show the kitemmuort number or not
-var dateArg string // the date string argument
-var setArg int // the kitemmuort count argument to be set for today
+var countArg bool	// show the kitemmuort number or not
+var dateArg string	// the date string argument
+var setArg int		// the kitemmuort count argument to be set for today
 
 // parse flags
 func flagsInit() {
@@ -102,11 +102,11 @@ func returnHomeDir() string {
 	}
 }
 
-// format the dateString flag to the appropriate format to use in the 
+// format the dateString flag to the appropriate format to use in the
 // sqlite db
 func formatDateString(d string) string {
-	const dateLayout = "2006-01-02" // the date format layout, to match 
-								// how date is stored in the sqlite db
+	const dateLayout = "2006-01-02" // the date format layout, to match
+	// how date is stored in the sqlite db
 
 	if d == "" {
 		// empty date, use today's
@@ -123,14 +123,14 @@ func formatDateString(d string) string {
 }
 
 func main() {
-	var dbReady bool // is the db ready?
-	var dbFile string // the database filename
+	var dbReady bool	// is the db ready?
+	var dbFile string	// the database filename
 
 	flagsInit()
 
 	homedir := returnHomeDir()
 
-	dbFile = filepath.Join(homedir,".kitemmuort.db")
+	dbFile = filepath.Join(homedir, ".kitemmuort.db")
 
 	// check the db file exists
 	if _, err := os.Stat(dbFile); err != nil {
