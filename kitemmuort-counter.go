@@ -165,13 +165,13 @@ func main() {
 		err := db.QueryRow("SELECT date, count FROM kitemmuorts WHERE date = ?", t).Scan(&date, &count)
 		if count == 0 {
 			// nothing has been set, yet, for date, exit
-			fmt.Fprintf(os.Stdout, "No kitemmuorts set for %s yet. Want to add some?\n", t)
+			fmt.Fprintf(os.Stdout, "\nNo kitemmuorts set for %s yet. Want to add some?\n", t)
 			os.Exit(0)
 		}
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Fprintf(os.Stdout, "Kitemmuort count for %s is %d\n", date, count)
+		fmt.Fprintf(os.Stdout, "\nKitemmuort count for %s is %d\n", date, count)
 	}
 
 	if setArg != 0 {
@@ -183,6 +183,6 @@ func main() {
 		if err != nil {
 			log.Fatal(exec_err)
 		}
-		fmt.Fprintf(os.Stdout, "%d kitemmuorts set for %s\n", setArg, t)
+		fmt.Fprintf(os.Stdout, "\n%d kitemmuorts set for %s\n", setArg, t)
 	}
 }
