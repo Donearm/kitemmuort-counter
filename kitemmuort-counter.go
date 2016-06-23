@@ -39,17 +39,17 @@ func flagsInit() {
 	}
 
 	const (
-		f_date	= ""
-		f_count = false
-		f_set	= 0
+		fDate	= ""
+		fCount = false
+		fSet	= 0
 	)
 
-	flag.StringVar(&dateArg, "date", f_date, "")
-	flag.StringVar(&dateArg, "d", f_date, "")
-	flag.BoolVar(&countArg, "count", f_count, "")
-	flag.BoolVar(&countArg, "c", f_count, "")
-	flag.IntVar(&setArg, "set", f_set, "")
-	flag.IntVar(&setArg, "s", f_set, "")
+	flag.StringVar(&dateArg, "date", fDate, "")
+	flag.StringVar(&dateArg, "d", fDate, "")
+	flag.BoolVar(&countArg, "count", fCount, "")
+	flag.BoolVar(&countArg, "c", fCount, "")
+	flag.IntVar(&setArg, "set", fSet, "")
+	flag.IntVar(&setArg, "s", fSet, "")
 
 	flag.Parse()
 
@@ -71,23 +71,23 @@ func checkDbExist(db *sql.DB) bool {
 	defer rows.Close()
 	if rows != nil {
 		return true
-	} else {
-		return false
 	}
+
+	return false
 }
 
 // create the default table
 func createTable(db *sql.DB) {
-	c_stmt, err := db.Prepare("CREATE TABLE kitemmuorts(date text, count int, UNIQUE (date));")
+	cStmt, err := db.Prepare("CREATE TABLE kitemmuorts(date text, count int, UNIQUE (date));")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ex_result, err := c_stmt.Exec()
+	exResult, err := cStmt.Exec()
 	// check that table doesn't already exist
 	if err != nil {
 		log.Println(err)
-		fmt.Println(ex_result)
+		fmt.Println(exResult)
 	}
 }
 
@@ -112,14 +112,13 @@ func formatDateString(d string) string {
 		// empty date, use today's
 		t := time.Now()
 		return t.Format(dateLayout)
-	} else {
-		t, err := time.Parse(dateLayout, d)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error parsing the date, is it in YYYY-MM-DD format?\n")
-			log.Fatal(err)
-		}
-		return t.Format(dateLayout)
 	}
+	t, err := time.Parse(dateLayout, d)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error parsing the date, is it in YYYY-MM-DD format?\n")
+		log.Fatal(err)
+	}
+	return t.Format(dateLayout)
 }
 
 func main() {
@@ -179,9 +178,9 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		_, exec_err := stmt.Exec(t, setArg)
+		_, execErr := stmt.Exec(t, setArg)
 		if err != nil {
-			log.Fatal(exec_err)
+			log.Fatal(execErr)
 		}
 		fmt.Fprintf(os.Stdout, "\n%d kitemmuorts set for %s\n", setArg, t)
 	}
