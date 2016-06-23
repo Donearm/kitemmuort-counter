@@ -62,7 +62,7 @@ func flagsInit() {
 	}
 }
 
-// check that the db exists and the default table has been created
+// checkDbExist checks that the db exists and that the default table has been created
 func checkDbExist(db *sql.DB) bool {
 	rows, err := db.Query("SELECT * FROM kitemmuorts")
 	if err != nil {
@@ -76,7 +76,7 @@ func checkDbExist(db *sql.DB) bool {
 	return false
 }
 
-// create the default table
+// createTable creates the default table to host the application's data
 func createTable(db *sql.DB) {
 	cStmt, err := db.Prepare("CREATE TABLE kitemmuorts(date text, count int, UNIQUE (date));")
 	if err != nil {
@@ -91,7 +91,7 @@ func createTable(db *sql.DB) {
 	}
 }
 
-// return home directory of current user
+// returnHomeDir returns the path of the current user's home directory
 func returnHomeDir() string {
 	if homedir := os.Getenv("HOMEPATH"); homedir != "" {
 		return homedir
@@ -102,8 +102,8 @@ func returnHomeDir() string {
 	}
 }
 
-// format the dateString flag to the appropriate format to use in the
-// sqlite db
+// formatDateString formats the dateString flag to the appropriate format for 
+// the SQLite database
 func formatDateString(d string) string {
 	const dateLayout = "2006-01-02" // the date format layout, to match
 	// how date is stored in the sqlite db
